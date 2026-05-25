@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Froth and Friends Café – Your perfect destination for coffee, comfort, and unforgettable moments in Vijayawada, Andhra Pradesh." />
+  <meta name="keywords" content="café Vijayawada, coffee shop, Froth and Friends, best café Vijayawada, hot chocolate, pizza, pasta" />
+  <title>Froth and Friends Café | Vijayawada</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── CSS Variables ────────────────────────── */
+    :root {
+      --brown-deep:  #1a0e08;
+      --brown-dark:  #2e1a10;
+      --brown-mid:   #5c3317;
+      --brown-warm:  #8b5c3a;
+      --gold:        #c9a84c;
+      --gold-light:  #e0c97a;
+      --cream:       #f5ede0;
+      --beige:       #ede0cc;
+      --beige-dark:  #d4c0a4;
+      --text-light:  #f9f3eb;
+      --text-mid:    #c4aa88;
+      --text-dark:   #2e1a10;
+      --shadow:      rgba(26,14,8,.55);
+      --ff-display:  'Cormorant Garamond', serif;
+      --ff-head:     'Playfair Display', serif;
+      --ff-body:     'Jost', sans-serif;
+      --ease:        cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── Reset & Base ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--ff-body);
+      background: var(--brown-deep);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ── Scroll animations ───────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(38px);
+      transition: opacity .75s var(--ease), transform .75s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── Utility ──────────────────────────────── */
+    .section-tag {
+      font-family: var(--ff-body);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.18;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .divider {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 0 auto 2.5rem;
+      width: fit-content;
+    }
+    .divider span { width: 50px; height: 1px; background: var(--gold); opacity: .6; }
+    .divider i { width: 7px; height: 7px; border: 1px solid var(--gold); transform: rotate(45deg); }
+
+    /* ── Buttons ──────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--ff-body);
+      font-size: .8rem; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: .85rem 2rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all .35s var(--ease);
+      position: relative; overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,.05);
+      transform: translateX(-100%);
+      transition: transform .35s var(--ease);
+    }
+    .btn:hover::after { transform: translateX(0); }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--brown-deep);
+      border-color: var(--gold);
+    }
+    .btn-gold:hover { background: var(--gold-light); border-color: var(--gold-light); }
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border-color: rgba(245,237,224,.5);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ════════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════════ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.25rem 4vw;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .4s var(--ease), padding .4s var(--ease), box-shadow .4s;
+    }
+    #navbar.scrolled {
+      background: rgba(26,14,8,.96);
+      backdrop-filter: blur(14px);
+      padding: .85rem 4vw;
+      box-shadow: 0 2px 28px rgba(0,0,0,.45);
+    }
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: .04em;
+    }
+    .nav-logo span { color: var(--cream); font-style: italic; font-weight: 300; }
+    .nav-links { display: flex; gap: 2.2rem; }
+    .nav-links a {
+      font-size: .78rem; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text-mid);
+      transition: color .25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: -3px;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width .3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { display: flex; gap: .75rem; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 1.5px; background: var(--cream);
+      transition: all .3s var(--ease);
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px,5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-5px); }
+    .mobile-menu {
+      display: none; flex-direction: column; align-items: center; gap: 1.5rem;
+      background: rgba(26,14,8,.97);
+      padding: 2rem 1rem;
+      position: fixed; top: 65px; left: 0; right: 0;
+      z-index: 999;
+      border-top: 1px solid rgba(201,168,76,.2);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: .85rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text-mid); font-weight: 500;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ════════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════ */
+    #hero {
+      position: relative; height: 100dvh; min-height: 580px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(26,14,8,.35) 0%, rgba(26,14,8,.7) 55%, rgba(26,14,8,.98) 100%),
+        url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+      transform: scale(1.05);
+      transition: transform 8s var(--ease);
+    }
+    #hero.loaded .hero-bg { transform: scale(1); }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(92,51,23,.18) 0%, transparent 70%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 0 1.5rem;
+      max-width: 820px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(201,168,76,.12);
+      border: 1px solid rgba(201,168,76,.3);
+      border-radius: 50px;
+      padding: .4rem 1.1rem;
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold-light); font-weight: 500;
+      margin-bottom: 1.75rem;
+      opacity: 0; animation: fadeUp .8s .3s var(--ease) forwards;
+    }
+    .hero-badge::before { content: '☕'; font-size: .85rem; }
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2.4rem, 7vw, 5.2rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--cream); margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp .9s .5s var(--ease) forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-sub {
+      font-size: clamp(.92rem, 2vw, 1.08rem);
+      font-weight: 300; color: var(--beige-dark);
+      line-height: 1.75; max-width: 560px; margin: 0 auto 2.5rem;
+      opacity: 0; animation: fadeUp .9s .7s var(--ease) forwards;
+    }
+    .hero-btns {
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+      opacity: 0; animation: fadeUp .9s .9s var(--ease) forwards;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      color: var(--text-mid); font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      z-index: 2;
+      animation: bounce 2.5s infinite;
+    }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 38px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    .hero-stats {
+      position: absolute; bottom: 5rem; right: 4vw;
+      display: flex; flex-direction: column; gap: .4rem;
+      z-index: 2;
+      opacity: 0; animation: fadeLeft .8s 1.1s var(--ease) forwards;
+    }
+    .hero-stat {
+      background: rgba(26,14,8,.7);
+      border: 1px solid rgba(201,168,76,.2);
+      backdrop-filter: blur(8px);
+      border-radius: 6px;
+      padding: .7rem 1.1rem;
+      text-align: center;
+    }
+    .hero-stat strong { display: block; font-family: var(--ff-display); font-size: 1.55rem; color: var(--gold-light); }
+    .hero-stat span { font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-mid); }
+
+    @keyframes fadeUp { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: translateY(0); } }
+    @keyframes fadeLeft { from { opacity:0; transform: translateX(28px); } to { opacity:1; transform: translateX(0); } }
+    @keyframes bounce { 0%,100%{transform: translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-6px);} }
+
+    /* ════════════════════════════════════════════
+       ABOUT
+    ════════════════════════════════════════════ */
+    #about {
+      background: var(--brown-deep);
+      padding: 7rem 6vw;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      max-width: 1160px; margin: 0 auto;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 2px;
+      filter: brightness(.88) saturate(1.1);
+    }
+    .about-img-accent {
+      position: absolute;
+      bottom: -2.5rem; right: -2.5rem;
+      width: 52%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border: 4px solid var(--brown-deep);
+      border-radius: 2px;
+      filter: brightness(.85) saturate(1.1);
+    }
+    .about-frame {
+      position: absolute; top: -1.5rem; left: -1.5rem;
+      right: 2rem; bottom: 2rem;
+      border: 1px solid rgba(201,168,76,.2);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .about-badge-float {
+      position: absolute; top: 1.5rem; left: 1.5rem;
+      background: var(--gold);
+      color: var(--brown-deep);
+      font-family: var(--ff-display); font-size: .85rem; font-weight: 600;
+      padding: .5rem .9rem;
+      border-radius: 2px;
+      letter-spacing: .04em;
+    }
+    .about-content { padding-right: 1rem; }
+    .about-body {
+      font-size: 1.02rem; font-weight: 300;
+      color: var(--beige-dark); line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+    .about-pillars {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin-top: 2rem;
+    }
+    .pillar {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(201,168,76,.15);
+      border-radius: 4px;
+      padding: 1.2rem 1rem;
+      transition: border-color .3s, background .3s;
+    }
+    .pillar:hover {
+      background: rgba(201,168,76,.06);
+      border-color: rgba(201,168,76,.4);
+    }
+    .pillar-icon { font-size: 1.4rem; margin-bottom: .5rem; }
+    .pillar-label { font-size: .8rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+    .pillar-text { font-size: .85rem; color: var(--text-mid); margin-top: .25rem; font-weight: 300; }
+
+    /* ════════════════════════════════════════════
+       MENU
+    ════════════════════════════════════════════ */
+    #menu {
+      background: linear-gradient(180deg, var(--brown-deep) 0%, #110a05 100%);
+      padding: 7rem 5vw;
+    }
+    .menu-header { text-align: center; margin-bottom: 3.5rem; }
+    .menu-tabs {
+      display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center;
+      margin-bottom: 3rem;
+    }
+    .tab-btn {
+      font-family: var(--ff-body); font-size: .74rem;
+      font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      padding: .55rem 1.4rem;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,.25);
+      color: var(--text-mid); border-radius: 50px;
+      cursor: pointer;
+      transition: all .3s var(--ease);
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--brown-deep);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.4rem;
+      max-width: 1160px; margin: 0 auto;
+    }
+    .menu-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
+      border-color: rgba(201,168,76,.4);
+    }
+    .menu-card-img {
+      width: 100%; height: 190px; object-fit: cover;
+      transition: transform .5s var(--ease);
+    }
+    .menu-card:hover .menu-card-img { transform: scale(1.05); }
+    .menu-card-body { padding: 1.2rem 1.1rem 1.4rem; }
+    .menu-card-tag {
+      font-size: .63rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: .4rem;
+    }
+    .menu-card-name {
+      font-family: var(--ff-display); font-size: 1.2rem; font-weight: 500;
+      color: var(--cream); margin-bottom: .4rem;
+    }
+    .menu-card-desc {
+      font-size: .82rem; color: var(--text-mid); font-weight: 300;
+      line-height: 1.65;
+    }
+    .menu-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1rem; padding-top: .9rem;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .menu-price {
+      font-family: var(--ff-display); font-size: 1.3rem;
+      color: var(--gold-light); font-weight: 600;
+    }
+    .menu-badge-pop {
+      font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+      background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.35);
+      color: var(--gold); padding: .2rem .6rem; border-radius: 50px;
+    }
+
+    /* ════════════════════════════════════════════
+       GALLERY
+    ════════════════════════════════════════════ */
+    #gallery {
+      background: var(--brown-dark);
+      padding: 7rem 5vw;
+    }
+    .gallery-header { text-align: center; margin-bottom: 3rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 220px 220px;
+      gap: 10px;
+      max-width: 1160px; margin: 0 auto;
+    }
+    .g-item { overflow: hidden; position: relative; }
+    .g-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s var(--ease), filter .6s var(--ease);
+      filter: brightness(.8) saturate(1.05);
+    }
+    .g-item:hover img { transform: scale(1.08); filter: brightness(.65) saturate(1.2); }
+    .g-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,14,8,.7) 0%, transparent 55%);
+      opacity: 0; transition: opacity .4s;
+      display: flex; align-items: flex-end;
+      padding: 1.1rem;
+    }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-label { font-family: var(--ff-display); font-size: 1rem; color: var(--cream); font-style: italic; }
+    .g-item:nth-child(1) { grid-column: span 5; grid-row: span 2; }
+    .g-item:nth-child(2) { grid-column: span 4; }
+    .g-item:nth-child(3) { grid-column: span 3; }
+    .g-item:nth-child(4) { grid-column: span 3; }
+    .g-item:nth-child(5) { grid-column: span 4; }
+
+    /* ════════════════════════════════════════════
+       REVIEWS
+    ════════════════════════════════════════════ */
+    #reviews {
+      background: var(--brown-deep);
+      padding: 7rem 5vw;
+    }
+    .reviews-header { text-align: center; margin-bottom: 3.5rem; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem;
+      max-width: 1160px; margin: 0 auto;
+    }
+    .review-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 6px;
+      padding: 2rem 1.6rem;
+      transition: transform .35s var(--ease), border-color .35s, box-shadow .35s;
+      position: relative;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,168,76,.35);
+      box-shadow: 0 16px 40px rgba(0,0,0,.4);
+    }
+    .review-quote {
+      font-size: 3rem; line-height: 1;
+      color: rgba(201,168,76,.2);
+      font-family: Georgia, serif;
+      position: absolute; top: 1rem; right: 1.4rem;
+    }
+    .review-stars { display: flex; gap: 3px; margin-bottom: 1rem; }
+    .star { color: var(--gold); font-size: .9rem; }
+    .review-text {
+      font-size: .93rem; line-height: 1.8; font-weight: 300;
+      color: var(--beige-dark); margin-bottom: 1.5rem;
+      font-style: italic;
+      font-family: var(--ff-display);
+    }
+    .review-author { display: flex; align-items: center; gap: .85rem; }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid rgba(201,168,76,.3);
+    }
+    .author-name { font-size: .85rem; font-weight: 600; color: var(--cream); }
+    .author-role { font-size: .72rem; color: var(--text-mid); font-weight: 300; }
+
+    /* ════════════════════════════════════════════
+       CONTACT
+    ════════════════════════════════════════════ */
+    #contact {
+      background: linear-gradient(180deg, #110a05 0%, var(--brown-dark) 100%);
+      padding: 7rem 5vw;
+    }
+    .contact-header { text-align: center; margin-bottom: 4rem; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem; align-items: start;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .info-card {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 6px;
+      padding: 1.25rem 1.1rem;
+      transition: border-color .3s;
+    }
+    .info-card:hover { border-color: rgba(201,168,76,.35); }
+    .info-icon {
+      font-size: 1.4rem; min-width: 2.2rem;
+      text-align: center; margin-top: .1rem;
+    }
+    .info-label { font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: .3rem; }
+    .info-val { font-size: .92rem; color: var(--cream); font-weight: 300; line-height: 1.6; }
+    .contact-map-wrap {
+      border: 1px solid rgba(201,168,76,.18);
+      border-radius: 6px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+    }
+    .contact-map-wrap iframe {
+      width: 100%; height: 360px; border: none;
+      display: block; filter: grayscale(.3) brightness(.85);
+    }
+    .whatsapp-btn {
+      display: inline-flex; align-items: center; gap: .65rem;
+      background: #25D366;
+      color: #fff;
+      font-family: var(--ff-body); font-size: .8rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .9rem 1.8rem;
+      border-radius: 4px;
+      margin-top: 1.5rem;
+      transition: background .3s, transform .25s;
+    }
+    .whatsapp-btn:hover { background: #1ebe57; transform: translateY(-2px); }
+    .whatsapp-icon { font-size: 1.2rem; }
+
+    /* ════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════ */
+    footer {
+      background: var(--brown-deep);
+      border-top: 1px solid rgba(201,168,76,.12);
+      padding: 4rem 6vw 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1100px; margin: 0 auto 3rem;
+    }
+    .footer-brand-name {
+      font-family: var(--ff-display);
+      font-size: 1.6rem; font-weight: 600;
+      color: var(--gold-light); margin-bottom: .6rem;
+    }
+    .footer-brand-name span { font-style: italic; font-weight: 300; }
+    .footer-tagline {
+      font-size: .83rem; font-weight: 300; color: var(--text-mid);
+      line-height: 1.75; margin-bottom: 1.5rem;
+    }
+    .social-links { display: flex; gap: .75rem; }
+    .social-link {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(201,168,76,.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; color: var(--text-mid);
+      transition: all .3s var(--ease);
+    }
+    .social-link:hover {
+      border-color: var(--gold); color: var(--gold);
+      background: rgba(201,168,76,.1);
+    }
+    .footer-col-title {
+      font-family: var(--ff-body);
+      font-size: .72rem; letter-spacing: .17em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 1.4rem;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: .7rem; }
+    .footer-links a {
+      font-size: .85rem; font-weight: 300; color: var(--text-mid);
+      transition: color .25s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-contact p {
+      font-size: .85rem; font-weight: 300; color: var(--text-mid);
+      line-height: 1.75;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 1.75rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .footer-copy { font-size: .75rem; color: rgba(196,170,136,.5); font-weight: 300; }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-wrap { max-width: 500px; margin: 0 auto; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .g-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+      .g-item:nth-child(1) { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #about, #menu, #gallery, #reviews, #contact { padding: 5rem 5vw; }
+      footer { padding: 3rem 5vw 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-stats { display: none; }
+      .about-pillars { grid-template-columns: 1fr; }
+      .about-img-accent { display: none; }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .g-item:nth-child(n) { grid-column: span 1; }
+      .g-item { height: 200px; }
+    }
+    @media (max-width: 480px) {
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 260px; justify-content: center; }
+    }
+
+    /* ── Loading screen ───────────────────────── */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--brown-deep);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+      transition: opacity .6s var(--ease);
+    }
+    #loader.hidden { opacity: 0; pointer-events: none; }
+    .loader-logo {
+      font-family: var(--ff-display);
+      font-size: 2rem; color: var(--gold-light);
+      letter-spacing: .08em;
+    }
+    .loader-bar {
+      width: 160px; height: 1px; background: rgba(201,168,76,.2);
+      position: relative; overflow: hidden;
+    }
+    .loader-bar::after {
+      content: ''; position: absolute; left: -100%; top: 0;
+      width: 100%; height: 100%; background: var(--gold);
+      animation: loadbar 1.4s var(--ease) forwards;
+    }
+    @keyframes loadbar { to { left: 0; } }
+  </style>
+</head>
+<body>
+
+<!-- ── LOADER ──────────────────────────────── -->
+<div id="loader">
+  <div class="loader-logo">Froth &amp; Friends</div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- ── NAVBAR ──────────────────────────────── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Froth &amp; <span>Friends</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="https://wa.me/919705981111" target="_blank" class="btn btn-gold" style="padding:.65rem 1.4rem;font-size:.72rem;">Book a Table</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-nav-link">About</a>
+  <a href="#menu" class="mobile-nav-link">Menu</a>
+  <a href="#gallery" class="mobile-nav-link">Gallery</a>
+  <a href="#reviews" class="mobile-nav-link">Reviews</a>
+  <a href="#contact" class="mobile-nav-link">Contact</a>
+  <a href="https://wa.me/919705981111" target="_blank" class="btn btn-gold" style="font-size:.75rem;">Book a Table</a>
+</div>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Now Open · 11 AM – 11 PM Daily</div>
+    <h1 class="hero-title">
+      Experience Great Food<br/>
+      &amp; <em>Cozy Vibes</em> at<br/>
+      Froth and Friends
+    </h1>
+    <p class="hero-sub">Your perfect destination for coffee, comfort, and unforgettable moments in the heart of Vijayawada.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn btn-gold">View Menu</a>
+      <a href="https://wa.me/919705981111" target="_blank" class="btn btn-outline">Reserve a Table</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>4.7★</strong>
+      <span>Rating</span>
+    </div>
+    <div class="hero-stat">
+      <strong>500+</strong>
+      <span>Happy Guests</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<section id="about">
+  <div class="about-grid">
+    <!-- Image Column -->
+    <div class="about-img-wrap reveal-left">
+      <div class="about-frame"></div>
+      <div class="about-badge-float">Est. 2022</div>
+      <img
+        class="about-img-main"
+        src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80&auto=format&fit=crop"
+        alt="Froth and Friends Café interior"
+        loading="lazy"
+      />
+      <img
+        class="about-img-accent"
+        src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=80&auto=format&fit=crop"
+        alt="Coffee being crafted"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Text Column -->
+    <div class="about-content reveal-right">
+      <p class="section-tag">Our Story</p>
+      <h2 class="section-title">A Place Where <em>Every Sip</em> Feels Like Home</h2>
+      <div class="divider" style="margin:0 0 1.5rem;"><span></span><i></i><span></span></div>
+      <p class="about-body">
+        Froth and Friends is a cozy café in Vijayawada known for its warm ambience, delicious food, rich hot chocolate, handcrafted beverages, and perfect hangout vibe for friends and families.
+      </p>
+      <p class="about-body">
+        Nestled in Maruti Cooperative Colony near Funtimes Club, we believe every great moment deserves great food and a comfortable seat. Whether it's a weekend brunch, a study session, or catching up with old friends — we're here to make it special.
+      </p>
+
+      <div class="about-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">☕</div>
+          <div class="pillar-label">Handcrafted Drinks</div>
+          <div class="pillar-text">Artisan coffees &amp; hot chocolates</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🍕</div>
+          <div class="pillar-label">Fresh Food</div>
+          <div class="pillar-text">Made-to-order meals daily</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🛋️</div>
+          <div class="pillar-label">Cozy Ambience</div>
+          <div class="pillar-text">Warm &amp; inviting spaces</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⭐</div>
+          <div class="pillar-label">4.7 Star Rated</div>
+          <div class="pillar-text">Loved by Vijayawada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     MENU
+════════════════════════════════════════ -->
+<section id="menu">
+  <div class="menu-header reveal">
+    <p class="section-tag">What We Serve</p>
+    <h2 class="section-title">Explore Our <em>Menu</em></h2>
+    <div class="divider"><span></span><i></i><span></span></div>
+  </div>
+
+  <div class="menu-tabs reveal">
+    <button class="tab-btn active" data-filter="all">All Items</button>
+    <button class="tab-btn" data-filter="beverages">Coffee &amp; Beverages</button>
+    <button class="tab-btn" data-filter="pizza">Pizza</button>
+    <button class="tab-btn" data-filter="pasta">Pasta</button>
+    <button class="tab-btn" data-filter="burgers">Burgers</button>
+    <button class="tab-btn" data-filter="sandwiches">Sandwiches</button>
+    <button class="tab-btn" data-filter="desserts">Desserts</button>
+  </div>
+
+  <div class="menu-grid" id="menuGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     GALLERY
+════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <p class="section-tag">Our Space</p>
+    <h2 class="section-title">A Glimpse of <em>Froth &amp; Friends</em></h2>
+    <div class="divider"><span></span><i></i><span></span></div>
+  </div>
+
+  <div class="gallery-grid reveal">
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&q=80&auto=format&fit=crop" alt="Café interior ambience" loading="lazy"/>
+      <div class="g-overlay"><span class="g-label">Cozy Interior</span></div>
+    </div>
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&auto=format&fit=crop" alt="Hot coffee close-up" loading="lazy"/>
+      <div class="g-overlay"><span class="g-label">Handcrafted Coffee</span></div>
+    </div>
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format&fit=crop" alt="Gourmet pizza" loading="lazy"/>
+      <div class="g-overlay"><span class="g-label">Gourmet Pizza</span></div>
+    </div>
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80&auto=format&fit=crop" alt="Fine dining setup" loading="lazy"/>
+      <div class="g-overlay"><span class="g-label">Dining Area</span></div>
+    </div>
+    <div class="g-item">
+      <img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=800&q=80&auto=format&fit=crop" alt="Friends enjoying café" loading="lazy"/>
+      <div class="g-overlay"><span class="g-label">Friends &amp; Moments</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     REVIEWS
+════════════════════════════════════════ -->
+<section id="reviews">
+  <div class="reviews-header reveal">
+    <p class="section-tag">What People Say</p>
+    <h2 class="section-title">Loved by Our <em>Guests</em></h2>
+    <div class="divider"><span></span><i></i><span></span></div>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Absolutely love this place! The hot chocolate is the best I've ever had in Vijayawada. The ambience is super cozy and perfect for a relaxed evening with friends.</p>
+      <div class="review-author">
+        <img class="review-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&auto=format&fit=crop&crop=face" alt="Priya" loading="lazy"/>
+        <div>
+          <div class="author-name">Priya Sharma</div>
+          <div class="author-role">Regular Customer</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Chicken Pesto Pasta here is absolutely divine. The food quality, presentation, and service is top-notch. Easily one of the best cafés in all of Vijayawada.</p>
+      <div class="review-author">
+        <img class="review-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&auto=format&fit=crop&crop=face" alt="Ravi" loading="lazy"/>
+        <div>
+          <div class="author-name">Ravi Kumar</div>
+          <div class="author-role">Food Enthusiast</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">A hidden gem near Funtimes Club! The Mac &amp; Cheese is comfort food at its finest, and the cozy seating makes you want to stay for hours. Will definitely be back!</p>
+      <div class="review-author">
+        <img class="review-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80&auto=format&fit=crop&crop=face" alt="Ananya" loading="lazy"/>
+        <div>
+          <div class="author-name">Ananya Reddy</div>
+          <div class="author-role">Local Explorer</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">We celebrated a birthday here and the whole experience was magical. The staff was incredibly warm, and the desserts were spectacular. 10/10 recommend!</p>
+      <div class="review-author">
+        <img class="review-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80&auto=format&fit=crop&crop=face" alt="Arjun" loading="lazy"/>
+        <div>
+          <div class="author-name">Arjun Mehta</div>
+          <div class="author-role">Birthday Guest</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The Veg Pizza here is loaded with toppings and the crust is just perfect. Great place to work from or just hang out. Love the warm lighting and music.</p>
+      <div class="review-author">
+        <img class="review-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80&auto=format&fit=crop&crop=face" alt="Meera" loading="lazy"/>
+        <div>
+          <div class="author-name">Meera Pillai</div>
+          <div class="author-role">Work-from-Café Fan</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">First visit and already a regular! The beverages menu is so creative and the food is consistently good. Froth and Friends truly lives up to its name.</p>
+      <div class="review-author">
+        <img class="review-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80&auto=format&fit=crop&crop=face" alt="Kiran" loading="lazy"/>
+        <div>
+          <div class="author-name">Kiran Rao</div>
+          <div class="author-role">New Regular</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-header reveal">
+    <p class="section-tag">Find Us</p>
+    <h2 class="section-title">Visit <em>Froth &amp; Friends</em></h2>
+    <div class="divider"><span></span><i></i><span></span></div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info reveal-left">
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Address</div>
+          <div class="info-val">Maruti Cooperative Colony,<br/>near Funtimes Club,<br/>Vijayawada, Andhra Pradesh</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-label">Phone</div>
+          <div class="info-val"><a href="tel:+919705981111" style="color:var(--cream);">+91 97059 81111</a></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🕐</div>
+        <div>
+          <div class="info-label">Opening Hours</div>
+          <div class="info-val">Monday – Sunday<br/>11:00 AM – 11:00 PM</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">⭐</div>
+        <div>
+          <div class="info-label">Rating</div>
+          <div class="info-val">4.7 / 5 · Highly Rated on Google</div>
+        </div>
+      </div>
+
+      <a href="https://wa.me/919705981111?text=Hi!%20I%20would%20like%20to%20book%20a%20table%20at%20Froth%20and%20Friends%20Caf%C3%A9." target="_blank" class="whatsapp-btn">
+        <span class="whatsapp-icon">💬</span>
+        Book a Table on WhatsApp
+      </a>
+    </div>
+
+    <div class="contact-map-wrap reveal-right">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.5765290044246!2d80.63284!3d16.50716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35f0a2a7b1b1b1%3A0x0!2sMaruti+Cooperative+Colony%2C+Vijayawada%2C+Andhra+Pradesh!5e0!3m2!1sen!2sin!4v1700000000000"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Froth and Friends Café Location"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Froth &amp; <span>Friends</span></div>
+      <p class="footer-tagline">Your perfect destination for coffee, comfort, and unforgettable moments in the heart of Vijayawada.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="footer-col-title">Quick Links</h4>
+      <nav class="footer-links">
+        <a href="#about">About Us</a>
+        <a href="#menu">Our Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+
+    <div class="footer-contact">
+      <h4 class="footer-col-title">Contact</h4>
+      <p>Maruti Cooperative Colony,<br/>near Funtimes Club,<br/>Vijayawada, AP</p>
+      <br/>
+      <p><a href="tel:+919705981111" style="color:var(--text-mid);">+91 97059 81111</a></p>
+      <br/>
+      <p>Open: 11 AM – 11 PM<br/>All Days</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Froth and Friends Café, Vijayawada. All rights reserved.</p>
+    <p class="footer-copy">Crafted with ☕ &amp; love</p>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+  /* ── Menu Data ──────────────────────────────── */
+  const menuItems = [
+    { id:1, name:'Signature Hot Chocolate', category:'beverages', tag:'Beverages', price:'₹180', desc:'Rich, velvety hot chocolate topped with homemade whipped cream and cocoa dusting.', img:'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=500&q=80&auto=format&fit=crop', popular:true },
+    { id:2, name:'Café Latte', category:'beverages', tag:'Beverages', price:'₹160', desc:'Smooth espresso with steamed micro-foam milk, served in a warm ceramic cup.', img:'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=500&q=80&auto=format&fit=crop' },
+    { id:3, name:'Cold Brew Frappe', category:'beverages', tag:'Beverages', price:'₹190', desc:'12-hour cold brew blended with ice cream, drizzled with caramel.', img:'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&q=80&auto=format&fit=crop' },
+    { id:4, name:'Veg Garden Pizza', category:'pizza', tag:'Pizza', price:'₹320', desc:'Thin crust loaded with bell peppers, olives, onions, mushrooms, and mozzarella.', img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80&auto=format&fit=crop', popular:true },
+    { id:5, name:'Chicken BBQ Pizza', category:'pizza', tag:'Pizza', price:'₹380', desc:'Smoky BBQ base with grilled chicken, red onions, and cheddar cheese blend.', img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&q=80&auto=format&fit=crop' },
+    { id:6, name:'Chicken Pesto Pasta', category:'pasta', tag:'Pasta', price:'₹290', desc:'Al dente penne tossed in house-made basil pesto with grilled chicken and parmesan.', img:'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=80&auto=format&fit=crop', popular:true },
+    { id:7, name:'Mac & Cheese', category:'pasta', tag:'Pasta', price:'₹240', desc:'Creamy four-cheese sauce with macaroni, baked golden with a crispy breadcrumb top.', img:'https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?w=500&q=80&auto=format&fit=crop', popular:true },
+    { id:8, name:'Classic Smash Burger', category:'burgers', tag:'Burgers', price:'₹280', desc:'Double smashed patty with cheddar, pickles, caramelized onions, and secret sauce.', img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&q=80&auto=format&fit=crop' },
+    { id:9, name:'Crispy Chicken Burger', category:'burgers', tag:'Burgers', price:'₹260', desc:'Buttermilk fried chicken fillet with coleslaw, jalapeños, and sriracha mayo.', img:'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=500&q=80&auto=format&fit=crop' },
+    { id:10, name:'Grilled Veggie Sandwich', category:'sandwiches', tag:'Sandwiches', price:'₹200', desc:'Grilled zucchini, peppers, and hummus on toasted sourdough with pesto drizzle.', img:'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500&q=80&auto=format&fit=crop' },
+    { id:11, name:'Club Sandwich', category:'sandwiches', tag:'Sandwiches', price:'₹230', desc:'Triple-decker with chicken, bacon, egg, lettuce, tomato, and herb mayo.', img:'https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=500&q=80&auto=format&fit=crop' },
+    { id:12, name:'Nutella Waffle', category:'desserts', tag:'Desserts', price:'₹200', desc:'Crispy Belgian waffle topped with Nutella, fresh berries, and vanilla ice cream.', img:'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=500&q=80&auto=format&fit=crop' },
+    { id:13, name:'Chocolate Lava Cake', category:'desserts', tag:'Desserts', price:'₹220', desc:'Warm chocolate molten cake with a gooey centre, served with a scoop of gelato.', img:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80&auto=format&fit=crop', popular:true },
+  ];
+
+  /* ── Render Menu ────────────────────────────── */
+  function renderMenu(filter = 'all') {
+    const grid = document.getElementById('menuGrid');
+    const items = filter === 'all' ? menuItems : menuItems.filter(i => i.category === filter);
+    grid.innerHTML = '';
+    items.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'menu-card reveal';
+      card.style.transitionDelay = `${idx * 0.06}s`;
+      card.innerHTML = `
+        <div style="overflow:hidden">
+          <img class="menu-card-img" src="${item.img}" alt="${item.name}" loading="lazy"/>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-tag">${item.tag}</div>
+          <div class="menu-card-name">${item.name}</div>
+          <div class="menu-card-desc">${item.desc}</div>
+          <div class="menu-card-footer">
+            <span class="menu-price">${item.price}</span>
+            ${item.popular ? '<span class="menu-badge-pop">Popular</span>' : ''}
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+    // Re-trigger observer
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.menu-card.reveal').forEach(el => observeReveal(el));
+    });
+  }
+
+  /* ── Tab Filter ─────────────────────────────── */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMenu(btn.dataset.filter);
+    });
+  });
+
+  /* ── Scroll Reveal ──────────────────────────── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  function observeReveal(el) { revealObserver.observe(el); }
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(observeReveal);
+
+  /* ── Navbar scroll ──────────────────────────── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Hero bg on load ────────────────────────── */
+  document.getElementById('hero').classList.add('loaded');
+
+  /* ── Hamburger ──────────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  /* ── Loader ─────────────────────────────────── */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 1500);
+  });
+
+  /* ── Initial menu render ────────────────────── */
+  renderMenu('all');
+</script>
+</body>
+</html>
